@@ -10,22 +10,28 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<LoginRequested>((event, emit) async {
       emit(AuthLoading());
       try {
-        // Симуляция логики входа
-        await Future.delayed(const Duration(seconds: 2));
+        // Реальный вызов Firebase для входа
+        await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: event.email,
+          password: event.password,
+        );
         emit(Authenticated());
       } catch (e) {
-        emit(AuthError('Ошибка входа'));
+        emit(AuthError('Ошибка входа: ${e.toString()}'));
       }
     });
 
     on<RegisterRequested>((event, emit) async {
       emit(AuthLoading());
       try {
-        // Симуляция логики регистрации
-        await Future.delayed(const Duration(seconds: 2));
+        // Реальный вызов Firebase для регистрации
+        await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: event.email,
+          password: event.password,
+        );
         emit(Authenticated());
       } catch (e) {
-        emit(AuthError('Ошибка регистрации'));
+        emit(AuthError('Ошибка регистрации: ${e.toString()}'));
       }
     });
   }
