@@ -77,7 +77,7 @@ class AuthView extends StatelessWidget {
                     ElevatedButton(
                       onPressed: () {
                         BlocProvider.of<AuthBloc>(context).add(
-                          LoginRequested(
+                          LogInRequested(
                             emailController.text.trim(),
                             passwordController.text.trim(),
                           ),
