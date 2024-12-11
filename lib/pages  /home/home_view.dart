@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:teplo_voda/components/drawer/bloc/drawer_bloc.dart';
 import 'package:teplo_voda/components/drawer/drawer.dart';
+import 'package:teplo_voda/pages%20%20/settings/settings_view.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -41,19 +42,5 @@ class HomeView extends StatelessWidget {
         MaterialPageRoute(builder: (context) => const SettingsView()),
       );
     }
-  }
-}
-
-class SettingsView extends StatelessWidget {
-  const SettingsView({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Настройки')),
-      body: const Center(
-        child: Text('Страница настроек'),
-      ),
-    );
   }
 }

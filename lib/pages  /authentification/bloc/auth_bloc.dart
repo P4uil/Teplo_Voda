@@ -12,12 +12,11 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       try {
         emit(AuthLoading());
 
-        // Имитация проверки учетных данных
         final isValid = await _authenticateUser(event.email, event.password);
         if (isValid) {
           emit(Authenticated());
         } else {
-          emit(AuthError("Неверный email или пароль"));
+          emit(const AuthError("Неверный email или пароль"));
         }
       } catch (e) {
         emit(AuthError("Произошла ошибка: ${e.toString()}"));
@@ -29,12 +28,11 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       try {
         emit(AuthLoading());
 
-        // Имитация регистрации пользователя
         final isRegistered = await _registerUser(event.email, event.password);
         if (isRegistered) {
           emit(Authenticated());
         } else {
-          emit(AuthError("Регистрация не удалась"));
+          emit(const AuthError("Регистрация не удалась"));
         }
       } catch (e) {
         emit(AuthError("Произошла ошибка: ${e.toString()}"));
@@ -44,28 +42,45 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     // Обработчик выхода
     on<LogOutRequested>((event, emit) async {
       emit(AuthLoading());
-
-      // Имитация выхода пользователя
       await _logOutUser();
-
       emit(AuthInitial());
+    });
+
+    // Обработчик удаления аккаунта
+    on<DeleteAccountRequested>((event, emit) async {
+      try {
+        emit(AuthLoading());
+
+        // Имитация удаления аккаунта
+        final isDeleted = await _deleteAccount();
+        if (isDeleted) {
+          emit(AuthInitial());
+        } else {
+          emit(const AuthError("Не удалось удалить аккаунт"));
+        }
+      } catch (e) {
+        emit(AuthError("Произошла ошибка: ${e.toString()}"));
+      }
     });
   }
 
   Future<bool> _authenticateUser(String email, String password) async {
     await Future.delayed(const Duration(seconds: 2));
-    // Имитация проверки через API
     return email == "user@example.com" && password == "password123";
   }
 
   Future<bool> _registerUser(String email, String password) async {
     await Future.delayed(const Duration(seconds: 2));
-    // Имитация успешной регистрации
-    return true; // Здесь добавьте логику взаимодействия с API
+    return true;
   }
 
   Future<void> _logOutUser() async {
     await Future.delayed(const Duration(seconds: 1));
-    // Очистка данных сессии
+  }
+
+  Future<bool> _deleteAccount() async {
+    await Future.delayed(const Duration(seconds: 2));
+    // Имитация успешного удаления аккаунта
+    return true; // Здесь добавьте логику удаления через API
   }
 }

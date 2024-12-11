@@ -19,9 +19,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => AuthBloc(FirebaseAuth.instance),
-      child: MaterialApp(
+      child: const MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: const AuthView(),
+        home: AuthView(),
       ),
     );
   }

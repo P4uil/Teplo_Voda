@@ -16,11 +16,17 @@ class AppDrawer extends StatelessWidget {
           // Верхняя часть Drawer
           Column(
             children: [
-              const DrawerHeader(
-                decoration: BoxDecoration(color: Colors.blue),
-                child: Text(
-                  'Меню',
-                  style: TextStyle(color: Colors.white, fontSize: 24),
+              Container(
+                color: Colors.blue, // Задаём фон для всего заголовка
+                child: const DrawerHeader(
+                  margin: EdgeInsets.zero, // Убираем отступы
+                  padding: EdgeInsets.zero, // Убираем внутренние отступы
+                  child: Center(
+                    child: Text(
+                      'Меню',
+                      style: TextStyle(color: Colors.white, fontSize: 24),
+                    ),
+                  ),
                 ),
               ),
               ListTile(
@@ -46,10 +52,9 @@ class AppDrawer extends StatelessWidget {
               const Divider(),
             ],
           ),
-
           // Нижняя часть Drawer
           Padding(
-            padding: const EdgeInsets.only(bottom: 16.0), // Отступ снизу
+            padding: const EdgeInsets.only(bottom: 16.0),
             child: ListTile(
               leading: const Icon(Icons.exit_to_app),
               title: const Text('Выход'),
@@ -57,9 +62,7 @@ class AppDrawer extends StatelessWidget {
                 context.read<AuthBloc>().add(LogOutRequested());
                 Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(
-                    builder: (context) => const AuthView(),
-                  ),
+                  MaterialPageRoute(builder: (context) => const AuthView()),
                 );
               },
             ),
