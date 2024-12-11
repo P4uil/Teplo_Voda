@@ -35,7 +35,7 @@ class AppDrawer extends StatelessWidget {
                 onTap: () {
                   context
                       .read<DrawerBloc>()
-                      .add(const NavigateToScreen('home'));
+                      .add(const DrawerNavigationEvent(screen: 'home'));
                   Navigator.pop(context); // Закрыть Drawer
                 },
               ),
@@ -45,7 +45,7 @@ class AppDrawer extends StatelessWidget {
                 onTap: () {
                   context
                       .read<DrawerBloc>()
-                      .add(const NavigateToScreen('settings'));
+                      .add(const DrawerNavigationEvent(screen: 'settings'));
                   Navigator.pop(context);
                 },
               ),

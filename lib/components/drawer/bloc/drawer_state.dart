@@ -12,7 +12,7 @@ class DrawerInitial extends DrawerState {}
 class DrawerNavigationState extends DrawerState {
   final String screen;
 
-  const DrawerNavigationState(this.screen);
+  const DrawerNavigationState({required this.screen});
 
   @override
   List<Object> get props => [screen];

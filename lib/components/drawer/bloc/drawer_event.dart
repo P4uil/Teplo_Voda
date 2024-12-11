@@ -7,10 +7,10 @@ abstract class DrawerEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class NavigateToScreen extends DrawerEvent {
+class DrawerNavigationEvent extends DrawerEvent {
   final String screen;
 
-  const NavigateToScreen(this.screen);
+  const DrawerNavigationEvent({required this.screen});
 
   @override
   List<Object> get props => [screen];
